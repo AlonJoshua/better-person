@@ -1,12 +1,12 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { Menu } from "../components/contextual/menu/menu";
-// import { MainContent } from "../components/contextual/main-content/main-content";
+import { Intro } from "../components/contextual/intro/intro";
 export default component$(() => {
   return (
     <>
       <Menu />
-      {/* <MainContent /> */}
+      <Intro />
     </>
   );
 });

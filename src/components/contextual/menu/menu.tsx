@@ -8,13 +8,13 @@ export const Menu = component$(() => {
     <div class="main-manu-toolbar">
       <ul class="main-menu">
         <li class="menu-item">
-          Better person
+          <a href="/">Better person</a>
         </li>
         <li class="menu-item">
-          philosophy
+          <a href="/philosophy">philosophy</a>
         </li>
         <li class="menu-item">
-          about me
+          <a href="/about">about me</a>
         </li>
       </ul>
     </div>

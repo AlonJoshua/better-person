@@ -1,0 +1,45 @@
+.main-manu-toolbar {
+  position: sticky;
+  top: 0;
+}
+
+.main-menu {
+  position: sticky;
+  top: 0;
+  display: inline-flex;
+  padding: 1rem 1rem .5rem;
+  margin: 0;
+  gap: 1rem;
+  font-size: 1.2rem;
+}
+
+.main-menu:after {
+  content: "";
+  display: block;
+  height: 0.1rem;
+  background-color: #2d2427;
+  position: absolute;
+  top: 100%;
+  left: 1rem;  
+  right: 1rem;
+}
+
+li {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+@media (max-width: 900px) {
+  .main-menu {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem .5rem;
+  }
+}

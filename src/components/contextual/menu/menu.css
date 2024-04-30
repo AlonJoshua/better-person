@@ -1,27 +1,27 @@
 .main-manu-toolbar {
   position: sticky;
   top: 0;
+  font-size: 2rem;
 }
 
 .main-menu {
   position: sticky;
   top: 0;
   display: inline-flex;
-  padding: 1rem 1rem .5rem;
+  padding: 1em 1em .5rem;
   margin: 0;
-  gap: 1rem;
-  font-size: 1.2rem;
+  gap: 2rem;
 }
 
 .main-menu:after {
   content: "";
   display: block;
-  height: 0.1rem;
+  height: 0.1em;
   background-color: #2d2427;
   position: absolute;
   top: 100%;
-  left: 1rem;  
-  right: 1rem;
+  left: 1em;  
+  right: 1em;
 }
 
 li {
@@ -30,16 +30,20 @@ li {
 
 a {
   text-decoration: none;
+  font-size: 1em;
 }
 
 a:visited {
   color: inherit;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
+  .main-manu-toolbar {
+    font-size: 1.6rem;
+  }
   .main-menu {
     display: flex;
     justify-content: space-between;
-    padding: 1rem 2rem .5rem;
+    padding: 1em 1.5em .5em;
   }
 }

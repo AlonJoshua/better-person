@@ -1,0 +1,50 @@
+.tip-of-the-day-section {
+  position: relative;
+  overflow-x: clip;
+}
+
+.tip-text-wrapper {
+  max-width: 60%;
+  margin: 0 auto 1em;
+}
+
+.tip-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin-bottom: 1em;
+}
+
+.tip-dialog-button {
+  padding: .7em;
+  background: transparent;
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.tip-dialog-button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.background-circle-right-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translate(40%, 40%);
+}
+
+.background-circle-left-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-70%);
+}
+
+.background-square-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-60%, 0%) rotate(45deg);
+}

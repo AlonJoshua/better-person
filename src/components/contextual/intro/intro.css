@@ -1,0 +1,43 @@
+.intro-section {
+  position: relative;
+  text-align: center;
+  margin-block: 2rem;
+  padding: 1rem 2rem;
+  font-size: 1.5rem;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: 500;
+  margin-block: 1em;
+}
+.subtitle {
+  font-size: 2em;
+  font-weight: 500;
+  margin-block: 0 1em;
+}
+
+.intro-text {
+  font-size: 1.5em;
+  margin-block: 1em;
+}
+
+.background-circle-right-top {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(40%, -40%);
+}
+
+.background-circle-left-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-70%);
+}
+
+@media (max-width: 800px) {
+  .intro-section {
+    font-size: 1rem;
+  }
+}

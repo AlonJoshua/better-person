@@ -10,5 +10,16 @@ body {
   font-style: normal;
 }
 
+/* Text colors */
 .text-blue {color: #1a73e8;}
 .text-purple {color: #BF36FF;}
+
+/* Background colors */
+.background-light-green {background-color: #D3FF8D;}
+
+/* Backround shapes */
+.background-circle {
+  border-radius: 50%;
+  padding: 10em;
+  z-index: -1;
+}

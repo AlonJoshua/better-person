@@ -21,7 +21,7 @@
   height: 0.1em;
   background-color: #2d2427;
   position: absolute;
-  top: 100%;
+  bottom: 0%;
   left: 1em;  
   right: 1em;
 }

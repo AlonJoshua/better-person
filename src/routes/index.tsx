@@ -4,6 +4,7 @@ import { Menu } from "../components/contextual/menu/menu";
 import { Intro } from "../components/contextual/intro/intro";
 import { TipOfTheDay } from "~/components/contextual/tip-of-the-day/tip-of-the-day";
 import { SectionSpacer } from "~/components/reusable/section-spacer/section-spacer";
+import { TipsSearch } from "~/components/contextual/tips-search/tips-search";
 export default component$(() => {
   return (
     <>
@@ -11,6 +12,7 @@ export default component$(() => {
       <Intro />
       <SectionSpacer />
       <TipOfTheDay />
+      <TipsSearch />
     </>
   );
 });

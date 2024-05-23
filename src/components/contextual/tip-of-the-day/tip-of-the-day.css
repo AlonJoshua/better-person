@@ -15,7 +15,8 @@
   margin-bottom: 1em;
 }
 
-.tip-dialog-button {
+.tip-dialog-button,
+.tip-dialog-close-button {
   padding: .7em;
   background: transparent;
   border: 2px solid rgba(0, 0, 0, 0.3);
@@ -24,7 +25,8 @@
   transition: background 0.3s;
 }
 
-.tip-dialog-button:hover {
+.tip-dialog-button:hover,
+.tip-dialog-close-button:hover {
   background: rgba(0, 0, 0, 0.1);
 }
 
@@ -47,4 +49,25 @@
   top: 0;
   left: 0;
   transform: translate(-60%, 0%) rotate(45deg);
+  animation: square linear 60s infinite;
+}
+
+.dialog-model {
+  max-width: 75%;
+  border-radius: 8px;
+  line-height: 2;
+  padding: 2rem;
+}
+
+.dialog-model::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+@keyframes square {
+  0% {
+    transform: translate(-60%, 0%) rotate(45deg);
+  }
+  100% {
+    transform: translate(-60%, 0%) rotate(405deg);
+  }
 }

@@ -29,10 +29,17 @@ export const TipOfTheDay = component$(() => {
           <button type="button" onClick$={handleTipOfTheDayButtonClick} class="tip-dialog-button text-light-grey text-bold">
             Why should I care?
           </button>
-          <dialog id="tip-of-thy-day-dialog">
+          <dialog id="tip-of-thy-day-dialog" class="dialog-model">
             <form method="dialog">
-              <h3>This is a pretty dialog</h3>
-              <button type="submit">Close</button>
+              <h3>
+                We are all in a rush to get somewhere, 
+                the problem is that we are rushing inside big metal boxes at hyper speed next to each other at different rates, 
+                and we stop thinking about how dangerous this is the moment we receive our driving license.
+                If you ever tried to pass sensitive baggage in your car (like a birthday cake), 
+                have you ever noticed that you were suddenly affected by a mysterious slowness? 
+                Remember that you are counted as a birthday cake to someone, and drive safely to your destination.
+              </h3>
+              <button type="submit" class="tip-dialog-close-button">Got it!</button>
             </form>
           </dialog>
         </div>

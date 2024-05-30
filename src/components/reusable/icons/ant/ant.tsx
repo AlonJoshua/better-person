@@ -8,7 +8,7 @@ export const Ant = component$((props: AntProps) => {
   return (
     <>
       <svg
-        Name={props.className}
+        class={props.className}
         width="36"
         height="38"
         viewBox="0 0 36 38"

@@ -12,6 +12,7 @@ export default component$(() => {
       <Intro />
       <SectionSpacer />
       <TipOfTheDay />
+      <SectionSpacer />
       <TipsSearch />
     </>
   );

@@ -37,6 +37,8 @@ body {
 .background-light-green {background-color: #D3FF8D;}
 .background-light-pink {background-color: #FFB1F3;}
 .background-light-blue {background-color: #B1E1FF;}
+.background-dark-blue {background-color: #309CFF;}
+
 
 /* Backround shapes */
 .background-circle {
@@ -48,5 +50,11 @@ body {
 .background-square {
   border-radius: 1em;
   padding: 10em;
+  z-index: -1;
+}
+
+.background-triangle {
+  padding: 10em;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
   z-index: -1;
 }

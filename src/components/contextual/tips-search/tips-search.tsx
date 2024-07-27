@@ -1,7 +1,6 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
-import { Question } from "../../reusable/icons/question/question";
 import styles from "./tips-search.css?inline";
-import { Swimming } from "~/components/reusable/icons/swimming/swimming";
+import { Icon } from "~/components/reusable/icon";
 
 export const TipsSearch = component$(() => {
   useStylesScoped$(styles);
@@ -25,7 +24,7 @@ export const TipsSearch = component$(() => {
               routine, not a demolition derby.
             </q>
             <span class="tip-card-info">
-              <Question />
+              <Icon name="Question" />
             </span>
           </p>
           <div class="tip-card-footer">
@@ -35,10 +34,10 @@ export const TipsSearch = component$(() => {
             </div>
             <div class="tip-icons">
               <span class="icon">
-                <Swimming />
+                <Icon name="Swimming" />
               </span>
               <span class="icon">
-                <Swimming />
+                <Icon name="Swimming" />
               </span>
             </div>
           </div>
@@ -50,7 +49,7 @@ export const TipsSearch = component$(() => {
               dance party, not trying to summon UFOs.
             </q>
             <span class="tip-card-info">
-              <Question />
+              <Icon name="Question" />
             </span>
           </p>
           <div class="tip-card-footer">
@@ -60,10 +59,10 @@ export const TipsSearch = component$(() => {
             </div>
             <div class="tip-icons">
               <span class="icon">
-                <Swimming />
+                <Icon name="Swimming" />
               </span>
               <span class="icon">
-                <Swimming />
+                <Icon name="Swimming" />
               </span>
             </div>
           </div>
@@ -75,7 +74,7 @@ export const TipsSearch = component$(() => {
               routine, not a demolition derby.
             </q>
             <span class="tip-card-info">
-              <Question />
+              <Icon name="Question" />
             </span>
           </p>
           <div class="tip-card-footer">
@@ -85,10 +84,10 @@ export const TipsSearch = component$(() => {
             </div>
             <div class="tip-icons">
               <span class="icon">
-                <Swimming />
+                <Icon name="Swimming" />
               </span>
               <span class="icon">
-                <Swimming />
+                <Icon name="Swimming" />
               </span>
             </div>
           </div>

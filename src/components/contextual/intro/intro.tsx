@@ -1,7 +1,6 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import styles from "./intro.css?inline";
-
-import { Ant } from "../../reusable/icons/ant/ant"
+import { Icon } from "~/components/reusable/icon";
 
 export const Intro = component$(() => {
   useStylesScoped$(styles);
@@ -10,7 +9,7 @@ export const Intro = component$(() => {
     <div class="intro-section">
       <div class="background-circle background-circle-right-top background-light-green"></div>
       <div class="intro-section-content">
-        <Ant />
+        <Icon name="Ant" />
         <h2 class="subtitle">Small Tips, Big Impact.</h2>
         <h1 class="title">Be a Better Person, One Laugh at a Time!</h1>
         <p class="intro-text">

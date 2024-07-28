@@ -23,7 +23,7 @@
   width: 100%;
   max-width: 40rem;
   margin-bottom: 1rem;
-  background: 1rem 50% url('../../reusable/icons//magnifier/magnifier.svg') no-repeat;
+  background: 1rem 50% url('../../reusable/svgs/magnifier.svg') no-repeat;
 }
 
 .tips-container {

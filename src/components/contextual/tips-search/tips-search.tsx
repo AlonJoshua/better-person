@@ -1,81 +1,29 @@
 import {
   component$,
   useStylesScoped$,
-  useResource$,
   Resource,
   useSignal,
-  useTask$,
 } from "@builder.io/qwik";
-import { PrismaClient } from "@prisma/client";
 import styles from "./tips-search.css?inline";
 import { Icon } from "~/components/reusable/icon";
-
-interface Tip {
-  id: number;
-  sentence: string;
-  explanation: string;
-  icons: string[];
-  tags: string[];
+import type { Tip } from "~/types";
+interface TipsSearchProps {
+  tips: Tip[];
 }
 
-interface QueryBody {
-  take: number;
-  skip: number;
-  cursor?: {
-    id: string;
-  };
-  where?: {
-    sentence: {
-      contains: string;
-    };
-    tags: {
-      hasSome: string[];
-    };
-  };
-}
-
-export const TipsSearch = component$(() => {
+export const TipsSearch = component$<TipsSearchProps>(({ tips }) => {
   useStylesScoped$(styles);
 
   const searchQuery = useSignal<string>("");
-  const searchCursor = useSignal<string>("");
+  const searchResult = useSignal<Tip[]>(tips);
 
-  const searchedTips = useResource$<Tip[]>(async () => {
-    const prisma = new PrismaClient();
-
-    const queryBody: QueryBody = {
-      take: 4,
-      skip: 0,
-    };
-
-    if (searchQuery.value) {
-      queryBody.where = {
-        sentence: {
-          contains: searchQuery.value,
-        },
-        tags: {
-          hasSome: searchQuery.value.split(" "),
-        },
-      };
+  const filterTipsBySearchQuery = (tip: Tip) => {
+    if (!searchQuery.value) {
+      return true;
     }
-
-    if (searchQuery.value) {
-      queryBody.cursor = {
-        id: searchCursor.value,
-      };
-    }
-
-    const response = await prisma.tip.findMany(queryBody);
-
-    searchCursor.value = response[response.length - 1].id.toString();
-    return response;
-  });
-
-  useTask$(({ track }) => {
-    track(searchQuery);
-    console.log(searchQuery.value);
-    searchCursor.value = "";
-  });
+    return tip.sentence.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      tip.tags.some((tag) => tag.toLowerCase().includes(searchQuery.value.toLowerCase()));
+  };
 
   return (
     <div class="tips-search-section section-font-big">
@@ -91,11 +39,12 @@ export const TipsSearch = component$(() => {
       </div>
       <div class="tips-container">
         <Resource
-          value={searchedTips}
+          value={searchResult}
           onPending={() => <div>Loading...</div>}
           onRejected={(error) => <div>Error: {error.message}</div>}
           onResolved={(tips: Tip[]) =>
-            tips.map((tip) => (
+            tips.filter((tip => filterTipsBySearchQuery(tip)))
+            .map((tip) => (
               <div class="tip-card" key={tip.id}>
                 <p class="tip-content">
                   <q dangerouslySetInnerHTML={tip.sentence}></q>

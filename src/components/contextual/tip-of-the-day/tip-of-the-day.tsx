@@ -1,19 +1,12 @@
 import { component$, useStylesScoped$, $ } from "@builder.io/qwik";
 import { Icon } from "~/components/reusable/icon";
 import styles from "./tip-of-the-day.css?inline";
-import type { JsonValue } from "@prisma/client/runtime/library";
-
-interface Tip {
-  tip: {
-    id: string;
-    sentence: string;
-    explanation: string;
-    icons: [string, string];
-    tags: JsonValue;
-  };
+import type { Tip } from "~/types";
+interface DailyTipProps {
+  tip: Tip;
 }
 
-export const TipOfTheDay = component$<Tip>(({ tip }) => {
+export const TipOfTheDay = component$<DailyTipProps>(({ tip }) => {
   useStylesScoped$(styles);
 
   const handleTipOfTheDayButtonClick = $(() => {

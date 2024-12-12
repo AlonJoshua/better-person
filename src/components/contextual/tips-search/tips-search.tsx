@@ -3,27 +3,58 @@ import {
   useStylesScoped$,
   Resource,
   useSignal,
+  useTask$,
 } from "@builder.io/qwik";
+
+import { server$ } from '@builder.io/qwik-city';
+
 import styles from "./tips-search.css?inline";
 import { Icon } from "~/components/reusable/icon";
 import type { Tip } from "~/types";
+import { GetSearchedTips } from "~/db/GetSearchedTips";
 interface TipsSearchProps {
-  tips: Tip[];
+  firstRenderTips: Tip[];
 }
 
-export const TipsSearch = component$<TipsSearchProps>(({ tips }) => {
+const serverTips = server$(async (query, page) => {
+  return GetSearchedTips(query, page);
+});
+
+export const TipsSearch = component$<TipsSearchProps>(({ firstRenderTips }) => {
   useStylesScoped$(styles);
 
-  const searchQuery = useSignal<string>("");
-  const searchResult = useSignal<Tip[]>(tips);
+  const isSearching = useSignal<boolean>(false);
 
-  const filterTipsBySearchQuery = (tip: Tip) => {
-    if (!searchQuery.value) {
-      return true;
-    }
-    return tip.sentence.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      tip.tags.some((tag) => tag.toLowerCase().includes(searchQuery.value.toLowerCase()));
-  };
+  const searchQuery = useSignal<string>("");
+  const searchResult = useSignal<Tip[]>(firstRenderTips);
+
+  const pagination = useSignal<number>(0);
+
+  useTask$(({ track }) => {
+    const isNewSearch = track(() => searchQuery.value);
+    const isPaginated = track(() => pagination.value);
+ 
+    const searchTips = async () => {
+
+      if (isNewSearch) {
+        isSearching.value = true;
+        const tips = await serverTips(searchQuery.value, pagination.value);
+        searchResult.value = tips;
+        isSearching.value = false;
+      }
+
+      if (isPaginated) {
+        isSearching.value = true;
+        const tips = await serverTips(searchQuery.value, pagination.value);
+        searchResult.value = [...searchResult.value, ...tips];
+        isSearching.value = false;
+      }
+    };
+    
+    searchTips();
+  });
+
+  console.log('isSearching', isSearching.value);
 
   return (
     <div class="tips-search-section section-font-big">
@@ -42,9 +73,9 @@ export const TipsSearch = component$<TipsSearchProps>(({ tips }) => {
           value={searchResult}
           onPending={() => <div>Loading...</div>}
           onRejected={(error) => <div>Error: {error.message}</div>}
-          onResolved={(tips: Tip[]) =>
-            tips.filter((tip => filterTipsBySearchQuery(tip)))
-            .map((tip) => (
+          onResolved={
+            (tips: Tip[]) =>
+            tips.map((tip) => (
               <div class="tip-card" key={tip.id}>
                 <p class="tip-content">
                   <q dangerouslySetInnerHTML={tip.sentence}></q>
@@ -70,6 +101,9 @@ export const TipsSearch = component$<TipsSearchProps>(({ tips }) => {
             ))
           }
         />
+        <button class="tip-search-pagination-button" onClick$={() => pagination.value++}>
+          More tips
+        </button>
       </div>
       <div class="background-triangle background-triangle-right-center background-light-pink"></div>
     </div>

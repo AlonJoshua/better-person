@@ -87,6 +87,10 @@
   gap: 1rem;
 }
 
+.tip-search-pagination-button {
+  margin: auto;
+}
+
 @media (max-width: 800px) {
   .tip-search-input {
     width: calc(100% - 4rem);

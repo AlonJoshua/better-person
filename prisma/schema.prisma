@@ -15,6 +15,6 @@ model Tip {
   id    String     @id @default(auto()) @map("_id") @db.ObjectId
   sentence String
   explanation String
-  tags Json
-  icons Json
+  tags String[]
+  icons String[]
 }

@@ -7,20 +7,20 @@ import { SectionSpacer } from "~/components/reusable/section-spacer";
 import { TipsSearch } from "~/components/contextual/tips-search/tips-search";
 import { routeLoader$ } from '@builder.io/qwik-city';
 import { GetDailyTip } from "~/db/GetDailyTip";
-import { GetAllTips } from "~/db/GetAllTips";
+import { GetSearchedTips } from "~/db/GetSearchedTips";
 
 export const useDailyTip = routeLoader$(() => {
   return GetDailyTip();
 });
 
-export const useAllTips = routeLoader$(() => {
-  return GetAllTips();
+export const useFirstRenderTips = routeLoader$(() => {
+  return GetSearchedTips();
 });
 
 export default component$(() => {
 
   const dailyTip = useDailyTip() as { value: any };
-  const allTips = useAllTips() as { value: any };
+  const firstRenderTips = useFirstRenderTips() as { value: any };
 
   return (
     <>
@@ -33,7 +33,7 @@ export default component$(() => {
         <div>No tip available for today.</div>
       )}
       <SectionSpacer />
-      <TipsSearch tips={allTips.value} />
+      <TipsSearch firstRenderTips={firstRenderTips.value} />
     </>
   );
 });

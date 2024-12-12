@@ -1,7 +1,7 @@
 export interface Tip {
-  id: number;
+  id: string;
   sentence: string;
   explanation: string;
-  icons: string[];
   tags: string[];
+  icons: string[];
 }

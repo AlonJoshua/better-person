@@ -1,9 +1,60 @@
-import { component$, useStylesScoped$ } from "@builder.io/qwik";
+import {
+  component$,
+  useStylesScoped$,
+  Resource,
+  useSignal,
+  useTask$,
+} from "@builder.io/qwik";
+
+import { server$ } from '@builder.io/qwik-city';
+
 import styles from "./tips-search.css?inline";
 import { Icon } from "~/components/reusable/icon";
+import type { Tip } from "~/types";
+import { GetSearchedTips } from "~/db/GetSearchedTips";
+interface TipsSearchProps {
+  firstRenderTips: Tip[];
+}
 
-export const TipsSearch = component$(() => {
+const serverTips = server$(async (query, page) => {
+  return GetSearchedTips(query, page);
+});
+
+export const TipsSearch = component$<TipsSearchProps>(({ firstRenderTips }) => {
   useStylesScoped$(styles);
+
+  const isSearching = useSignal<boolean>(false);
+
+  const searchQuery = useSignal<string>("");
+  const searchResult = useSignal<Tip[]>(firstRenderTips);
+
+  const pagination = useSignal<number>(0);
+
+  useTask$(({ track }) => {
+    const isNewSearch = track(() => searchQuery.value);
+    const isPaginated = track(() => pagination.value);
+ 
+    const searchTips = async () => {
+
+      if (isNewSearch) {
+        isSearching.value = true;
+        const tips = await serverTips(searchQuery.value, pagination.value);
+        searchResult.value = tips;
+        isSearching.value = false;
+      }
+
+      if (isPaginated) {
+        isSearching.value = true;
+        const tips = await serverTips(searchQuery.value, pagination.value);
+        searchResult.value = [...searchResult.value, ...tips];
+        isSearching.value = false;
+      }
+    };
+    
+    searchTips();
+  });
+
+  console.log('isSearching', isSearching.value);
 
   return (
     <div class="tips-search-section section-font-big">
@@ -14,84 +65,45 @@ export const TipsSearch = component$(() => {
           class="tip-search-input"
           type="text"
           placeholder="Search for tips"
+          bind:value={searchQuery}
         />
       </div>
       <div class="tips-container">
-        <div class="tip-card">
-          <p class="tip-content">
-            <q>
-              Merge onto the highway like you're joining a synchronized swimming
-              routine, not a demolition derby.
-            </q>
-            <span class="tip-card-info">
-              <Icon name="Question" />
-            </span>
-          </p>
-          <div class="tip-card-footer">
-            <div class="tip-search-tags">
-              <span class="tag">Driving</span>
-              <span class="tag">Safety</span>
-            </div>
-            <div class="tip-icons">
-              <span class="icon">
-                <Icon name="Swimming" />
-              </span>
-              <span class="icon">
-                <Icon name="Swimming" />
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="tip-card">
-          <p class="tip-content">
-            <q>
-              Use your turn signal like you're sending out invitations to a
-              dance party, not trying to summon UFOs.
-            </q>
-            <span class="tip-card-info">
-              <Icon name="Question" />
-            </span>
-          </p>
-          <div class="tip-card-footer">
-            <div class="tip-search-tags">
-              <span class="tag">Driving</span>
-              <span class="tag">Safety</span>
-            </div>
-            <div class="tip-icons">
-              <span class="icon">
-                <Icon name="Swimming" />
-              </span>
-              <span class="icon">
-                <Icon name="Swimming" />
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="tip-card">
-          <p class="tip-content">
-            <q>
-              Merge onto the highway like you're joining a synchronized swimming
-              routine, not a demolition derby.
-            </q>
-            <span class="tip-card-info">
-              <Icon name="Question" />
-            </span>
-          </p>
-          <div class="tip-card-footer">
-            <div class="tip-search-tags">
-              <span class="tag">Driving</span>
-              <span class="tag">Safety</span>
-            </div>
-            <div class="tip-icons">
-              <span class="icon">
-                <Icon name="Swimming" />
-              </span>
-              <span class="icon">
-                <Icon name="Swimming" />
-              </span>
-            </div>
-          </div>
-        </div>
+        <Resource
+          value={searchResult}
+          onPending={() => <div>Loading...</div>}
+          onRejected={(error) => <div>Error: {error.message}</div>}
+          onResolved={
+            (tips: Tip[]) =>
+            tips.map((tip) => (
+              <div class="tip-card" key={tip.id}>
+                <p class="tip-content">
+                  <q dangerouslySetInnerHTML={tip.sentence}></q>
+                  <span class="tip-card-info">
+                    <Icon name="Question" />
+                  </span>
+                </p>
+                <div class="tip-card-footer">
+                  <div class="tip-search-tags">
+                    <span class="tag">{tip.tags[0]}</span>
+                    <span class="tag">{tip.tags[1]}</span>
+                  </div>
+                  <div class="tip-icons">
+                    <span class="icon">
+                      <Icon name={tip.icons[0]} />
+                    </span>
+                    <span class="icon">
+                      <Icon name={tip.icons[1]} />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        />
+        <button class="tip-search-pagination-button" onClick$={() => pagination.value++}>
+          More tips
+        </button>
       </div>
       <div class="background-triangle background-triangle-right-center background-light-pink"></div>
     </div>

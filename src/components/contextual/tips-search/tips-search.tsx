@@ -54,19 +54,22 @@ export const TipsSearch = component$<TipsSearchProps>(({ firstRenderTips }) => {
     searchTips();
   });
 
-  console.log('isSearching', isSearching.value);
-
   return (
     <div class="tips-search-section section-font-big">
       <div class="background-circle background-circle-left-bottom background-dark-blue"></div>
       <div class="search-container">
         <h3 class="search-title">Find tips fit to your goals</h3>
-        <input
-          class="tip-search-input"
-          type="text"
-          placeholder="Search for tips"
-          bind:value={searchQuery}
-        />
+        <div class="search-input-container">
+          <input
+            class="tip-search-input"
+            type="text"
+            placeholder="Search for tips"
+            bind:value={searchQuery}
+          />
+          <div class={`search-input-container-loading ${!isSearching.value ? 'search-input-container-loading-hide' : ''}`}>
+
+          </div>
+        </div>
       </div>
       <div class="tips-container">
         <Resource
@@ -101,8 +104,12 @@ export const TipsSearch = component$<TipsSearchProps>(({ firstRenderTips }) => {
             ))
           }
         />
-        <button class="tip-search-pagination-button" onClick$={() => pagination.value++}>
-          More tips
+      </div>
+      <div class="pagination-container">
+        <button disabled={isSearching.value} class={`tip-search-pagination-button ${isSearching.value ? 'tip-search-pagination-button-loading' : ''}`} onClick$={() => pagination.value++}>
+          <span>
+            More tips
+          </span>
         </button>
       </div>
       <div class="background-triangle background-triangle-right-center background-light-pink"></div>

@@ -26,27 +26,46 @@ export const TipsSearch = component$<TipsSearchProps>(({ firstRenderTips }) => {
   const isSearching = useSignal<boolean>(false);
 
   const searchQuery = useSignal<string>("");
+  const lastSearchQuery = useSignal<string>("");
   const searchResult = useSignal<Tip[]>(firstRenderTips);
+  const isLastPage = useSignal<boolean>(false);
 
   const pagination = useSignal<number>(0);
 
   useTask$(({ track }) => {
-    const isNewSearch = track(() => searchQuery.value);
-    const isPaginated = track(() => pagination.value);
+    const isNewSearch = track(searchQuery);
+    const isPaginated = track(pagination);
  
     const searchTips = async () => {
 
-      if (isNewSearch) {
+      if (isNewSearch !== lastSearchQuery.value) {
+        pagination.value = 0;
+        lastSearchQuery.value = searchQuery.value;
+        return;
+      }
+
+      if (isNewSearch !== lastSearchQuery.value) {
+        pagination.value = 0;
+        lastSearchQuery.value = searchQuery.value;
         isSearching.value = true;
+
         const tips = await serverTips(searchQuery.value, pagination.value);
+        
         searchResult.value = tips;
         isSearching.value = false;
+        isLastPage.value = false;
       }
 
       if (isPaginated) {
         isSearching.value = true;
         const tips = await serverTips(searchQuery.value, pagination.value);
-        searchResult.value = [...searchResult.value, ...tips];
+
+        if (tips.length === 0) {
+          isLastPage.value = true;
+        } else {
+          searchResult.value = [...searchResult.value, ...tips];
+        }
+
         isSearching.value = false;
       }
     };
@@ -106,7 +125,7 @@ export const TipsSearch = component$<TipsSearchProps>(({ firstRenderTips }) => {
         />
       </div>
       <div class="pagination-container">
-        <button disabled={isSearching.value} class={`tip-search-pagination-button ${isSearching.value ? 'tip-search-pagination-button-loading' : ''}`} onClick$={() => pagination.value++}>
+        <button disabled={isSearching.value || isLastPage.value} class={`tip-search-pagination-button ${isSearching.value ? 'tip-search-pagination-button-loading' : ''}`} onClick$={() => pagination.value++}>
           <span>
             More tips
           </span>

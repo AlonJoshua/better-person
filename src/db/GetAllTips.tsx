@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client/edge";
 
 export const GetAllTips = async () => {
   const prisma = new PrismaClient();

@@ -15,9 +15,9 @@
     "build": "qwik build",
     "build.client": "vite build",
     "build.preview": "vite build --ssr src/entry.preview.tsx",
-    "build.server": "vite build -c adapters/netlify-edge/vite.config.ts",
+    "build.server": "vite build -c adapters/cloudflare-pages/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
-    "deploy": "netlify deploy --build",
+    "deploy": "wrangler pages deploy ./dist",
     "dev": "vite --mode ssr",
     "dev.debug": "node --inspect-brk ./node_modules/vite/bin/vite.js --mode ssr --force",
     "fmt": "prettier --write .",
@@ -28,6 +28,7 @@
     "prisma:db:push": "prisma db push",
     "prisma:generate": "prisma generate",
     "prisma:migrate:prod": "prisma migrate deploy",
+    "serve": "wrangler pages dev ./dist --compatibility-flags=nodejs_als",
     "start": "vite --open --mode ssr",
     "qwik": "qwik"
   },
@@ -52,7 +53,8 @@
     "undici": "*",
     "vercel": "^29.1.1",
     "vite": "^5.1.4",
-    "vite-tsconfig-paths": "^4.2.1"
+    "vite-tsconfig-paths": "^4.2.1",
+    "wrangler": "^3.0.0"
   },
   "dependencies": {
     "@prisma/client": "^5.12.1",

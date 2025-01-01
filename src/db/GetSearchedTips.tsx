@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client/edge";
+import { PrismaClient } from "@prisma/client";
 import type { Tip } from "~/types";
 
 export const GetSearchedTips = async (query = '', page = 0): Promise<Tip[]> => {

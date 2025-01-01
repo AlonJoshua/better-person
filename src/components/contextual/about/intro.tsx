@@ -1,6 +1,8 @@
 import { component$, useStylesScoped$ } from "@builder.io/qwik";
 import styles from "./intro.css?inline";
 import { Icon } from "~/components/reusable/icon";
+import ImageOne from '~/assets/me-and-noam.jpg?w=300&h=400&jsx'
+import ImageTwo from "~/assets/me-and-kim.jpg?w=533.33&h=400&jsx";
 
 export const Intro = component$(() => {
   useStylesScoped$(styles);
@@ -13,8 +15,12 @@ export const Intro = component$(() => {
         <h1 class="title">Warning! cuteness ahead of you!</h1>
 
         <div class="image-container">
-          <img class="image-1" src="../../src/assets/me-and-noam.jpg" alt="Alon and Noam" width={300} height={400} />
-          <img class="image-2" src="../../src/assets/me-and-kim.jpg" alt="" height={400} width={533.33} />
+          <div class="image-1">
+            <ImageOne />
+          </div>
+          <div class="image-2">
+            <ImageTwo />
+          </div>
         </div>
 
         <p class="intro-text">

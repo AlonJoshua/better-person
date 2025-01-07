@@ -53,7 +53,8 @@
 }
 
 .dialog-model {
-  max-width: 75%;
+  width: 75%;
+  max-width: 500px;
   border-radius: 8px;
   line-height: 2;
   padding: 2rem;

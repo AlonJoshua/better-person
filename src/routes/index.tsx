@@ -8,6 +8,7 @@ import { TipsSearch } from "~/components/contextual/tips-search/tips-search";
 import { routeLoader$ } from '@builder.io/qwik-city';
 import { GetDailyTip } from "~/db/GetDailyTip";
 import { GetSearchedTips } from "~/db/GetSearchedTips";
+import { Footer } from "~/components/contextual/footer/footer";
 
 export const useDailyTip = routeLoader$(() => {
   return GetDailyTip();
@@ -34,6 +35,7 @@ export default component$(() => {
       )}
       <SectionSpacer />
       <TipsSearch firstRenderTips={firstRenderTips.value} />
+      <Footer />
     </>
   );
 });

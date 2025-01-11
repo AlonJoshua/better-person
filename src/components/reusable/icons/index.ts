@@ -5,3 +5,5 @@ export { Question } from "./question";
 export { Swimming } from "./swimming";
 export { ThinkingFace } from "./thinking-face";
 export { HeartFace } from "./heart-face";
+export { Linkedin } from "./linkedin";
+export { Github } from "./github";

@@ -5,9 +5,9 @@ import { Intro } from "../components/contextual/homepage/intro/intro";
 import { TipOfTheDay } from "~/components/contextual/tip-of-the-day/tip-of-the-day";
 import { SectionSpacer } from "~/components/reusable/section-spacer";
 import { TipsSearch } from "~/components/contextual/tips-search/tips-search";
+import { GetAllTips } from "~/db/GetAllTips";
 import { routeLoader$ } from '@builder.io/qwik-city';
 import { GetDailyTip } from "~/db/GetDailyTip";
-import { GetSearchedTips } from "~/db/GetSearchedTips";
 import { Footer } from "~/components/contextual/footer/footer";
 
 export const useDailyTip = routeLoader$(() => {
@@ -15,7 +15,7 @@ export const useDailyTip = routeLoader$(() => {
 });
 
 export const useFirstRenderTips = routeLoader$(() => {
-  return GetSearchedTips();
+  return GetAllTips();
 });
 
 export default component$(() => {

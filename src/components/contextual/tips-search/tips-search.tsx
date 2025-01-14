@@ -69,7 +69,7 @@ export const TipsSearch = component$<TipsSearchProps>(({ firstRenderTips }) => {
           ></div>
         </div>
       </div>
-      <div class="tips-container">
+      <div class={`tips-container ${filteredTips.value.length ? "" : "tips-container-no-tips"}`}>
         <Resource
           value={filteredTips}
           onPending={() => <div>Loading...</div>}
@@ -113,7 +113,7 @@ export const TipsSearch = component$<TipsSearchProps>(({ firstRenderTips }) => {
             ) : (
               <div class="tip-card">
                 <p class="tip-content">
-                  <q>No tip found, sorry...</q>
+                  <q>No tips found, sorry...</q>
                   <span class="tip-card-info">
                     <Icon name="Question" />
                   </span>

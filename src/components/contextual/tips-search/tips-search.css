@@ -152,6 +152,13 @@
   animation: spin 1s linear infinite;
 }
 
+.tips-container-no-tips {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20rem;
+}ww
+
 .dialog-model {
   width: 75%;
   max-width: 500px;

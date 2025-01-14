@@ -67,11 +67,18 @@
   border-radius: 8px;
   cursor: pointer;
   transition: background 0.3s;
-  font-size: 1.5rem;
 }
 
 .tip-card:hover {
   background: rgba(0, 0, 0, 0.1);
+}
+
+.tip-content-wrapper {
+  font-size: 1.5rem;
+}
+
+.tip-content-wrapper * {
+  pointer-events: none;
 }
 
 .tip-content {
@@ -143,6 +150,18 @@
   border-radius: 50%;
   border-top-color: white;
   animation: spin 1s linear infinite;
+}
+
+.dialog-model {
+  width: 75%;
+  max-width: 500px;
+  border-radius: 8px;
+  line-height: 2;
+  padding: 2rem;
+}
+
+.dialog-model::backdrop {
+  background: rgba(0, 0, 0, 0.5);
 }
 
 @media (max-width: 800px) {

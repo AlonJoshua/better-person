@@ -39,16 +39,16 @@ export const TipOfTheDay = component$<DailyTipProps>(({ tip }) => {
           >
             Why should I care?
           </button>
-          <dialog id="tip-of-thy-day-dialog" class="dialog-model">
-            <form method="dialog">
-              <h3>{tip.explanation}</h3>
-              <button type="submit" class="tip-dialog-close-button">
-                Got it!
-              </button>
-            </form>
-          </dialog>
         </div>
       </div>
+      <dialog id="tip-of-thy-day-dialog" class="dialog-model">
+        <form method="dialog">
+          <h3>{tip.explanation}</h3>
+          <button type="submit" class="tip-dialog-close-button">
+            Got it!
+          </button>
+        </form>
+      </dialog>
       <div class="background-square background-square-left background-light-pink"></div>
     </div>
   );

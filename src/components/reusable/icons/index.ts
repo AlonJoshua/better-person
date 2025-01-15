@@ -7,3 +7,7 @@ export { ThinkingFace } from "./thinking-face";
 export { HeartFace } from "./heart-face";
 export { Linkedin } from "./linkedin";
 export { Github } from "./github";
+export { Giraffe } from "./giraffe";
+export { Ballerina } from "./ballerina";
+export { Bubbles } from "./bubbles";
+export { MonsterTruck } from "./monster-truck";
